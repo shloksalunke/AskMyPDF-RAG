@@ -62,11 +62,12 @@ if st.session_state.get("chat_memory"):
     chat_json = json.dumps(st.session_state.chat_memory, indent=2)
     st.sidebar.download_button("💾 Download This Chat", chat_json, file_name="askmypdf_chat.json", mime="application/json")
 
-# Init vars
+# Init vars (💡 include current_file)
 st.session_state.setdefault("chat_memory", [])
 st.session_state.setdefault("vector_db", None)
 st.session_state.setdefault("rag_chain", None)
 st.session_state.setdefault("pdf_loaded", False)
+st.session_state.setdefault("current_file", None)
 
 @st.cache_data
 def clean_text(text):
@@ -98,7 +99,9 @@ if not st.session_state.pdf_loaded:
                 memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
 
                 retriever = st.session_state.vector_db.as_retriever(search_kwargs={"k": 5})
-                st.session_state.rag_chain = ConversationalRetrievalChain.from_llm(llm=llm, retriever=retriever, memory=memory)
+                st.session_state.rag_chain = ConversationalRetrievalChain.from_llm(
+                    llm=llm, retriever=retriever, memory=memory
+                )
 
                 os.remove(temp_path)
                 st.session_state.pdf_loaded = True
