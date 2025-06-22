@@ -55,8 +55,19 @@ if st.sidebar.button("➕ New Chat"):
     st.session_state.clear()
     st.query_params["new_chat"] = str(uuid.uuid4())
 
-# Upload a PDF file
-uploaded_pdf = st.sidebar.file_uploader("📄 Upload a PDF file", type="pdf")
+# 🔰 Upload PDF on the main screen (only)
+uploaded_pdf = st.file_uploader("📄 Upload a PDF to get started", type="pdf")
+
+# Show welcome instructions if no file is uploaded
+if not uploaded_pdf:
+    st.markdown("""
+    ## 👋 Welcome to AskMyPDF
+    To begin, please **upload a PDF file** using the box above.  
+    - 💡 No internet needed  
+    - 🔐 100% Private & Local  
+    - 🤖 Ask questions from your documents after upload!
+    """)
+
 
 # Initialize empty memory
 if "chat_memory" not in st.session_state:
