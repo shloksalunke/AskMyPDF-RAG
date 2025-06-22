@@ -91,6 +91,6 @@ This project is licensed under the MIT License.
 
 📬 Feedback
 Have ideas or suggestions?
-Reach me on LinkedIn or drop a star ⭐ on GitHub!
+Reach me on LinkedIn(www.linkedin.com/in/shlok-salunke-4947b429b) or drop a star ⭐ on GitHub!
 
 
