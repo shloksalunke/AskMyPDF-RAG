@@ -15,22 +15,76 @@ from langchain_core.documents import Document
 load_dotenv()
 api_key = os.getenv("MISTRAL_API_KEY")
 
-# Page setup
+# Streamlit page config and styles
 st.set_page_config(page_title="📄 AskMyPDF", layout="wide")
 st.markdown("""
-<h1 style='text-align: center; font-size: 3em;'>🧠 AskMyPDF</h1>
-<h4 style='text-align: center; color: gray;'>Chat with your PDF. 100% Private. Local Only.</h4>
+    <style>
+    .sidebar-toggle {
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+        width: 3.5rem;
+        height: 3.5rem;
+        background-color: red;
+        color: white;
+        font-size: 1.8rem;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.7rem;
+        cursor: pointer;
+        z-index: 1000;
+        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        transition: background 0.3s ease;
+    }
+    .sidebar-toggle:hover {
+        background-color: darkred;
+    }
+    </style>
+    <script>
+    function toggleSidebar() {
+        const sidebar = parent.document.querySelector('.css-1lcbmhc');
+        if (sidebar) {
+            sidebar.style.display = sidebar.style.display === 'none' ? 'block' : 'none';
+        }
+    }
+    </script>
+    <div class="sidebar-toggle" onclick="toggleSidebar()">⏩</div>
+""", unsafe_allow_html=True)
+# Header
+st.markdown("""
+<h1 style='text-align: center;'>🧠 AskMyPDF</h1>
+<h4 style='text-align: center; color: gray;'>Chat with your PDF. Fast. Smart. 100% Private.</h4>
 """, unsafe_allow_html=True)
 
-# Session ID
+# Sidebar Menu
+st.sidebar.markdown("### ☰ Menu")
+
+# Help Section
+with st.expander("ℹ️ How to Use & PDF Guide"):
+    st.markdown("""
+**📝 Upload Tips:**
+- ✅ Text-based PDFs (ebooks, reports)
+- ❌ Scanned images, handwritten, or locked files
+
+**⚙️ Steps:**
+1. 📄 Upload a PDF  
+2. ❓ Ask a question  
+3. 💬 Get answers instantly  
+4. 💾 Download chat anytime
+
+**💡 Example Prompts:**
+- "Summarize page 2"  
+- "What are the key findings?"
+""")
+
+# Session ID setup
 if "user_id" not in st.session_state:
     st.session_state.user_id = str(uuid.uuid4())
 
 user_folder = os.path.join("chats", st.session_state.user_id)
 os.makedirs(user_folder, exist_ok=True)
-
-# Sidebar
-st.sidebar.markdown("### ☰ Menu")
 
 # New Chat Button
 if st.sidebar.button("➕ Start New Chat"):
@@ -41,7 +95,7 @@ if st.sidebar.button("➕ Start New Chat"):
     st.session_state.pdf_loaded = False
     st.rerun()
 
-# Chat list per user
+# Chat list
 def get_saved_chats():
     if not os.path.exists(user_folder):
         return []
@@ -49,7 +103,6 @@ def get_saved_chats():
 
 selected_chat = st.sidebar.selectbox("🗂️ Previous Chats", ["New Chat"] + get_saved_chats())
 
-# Load chat if exists
 if selected_chat != "New Chat":
     path = os.path.join(user_folder, selected_chat)
     if os.path.exists(path):
@@ -57,12 +110,12 @@ if selected_chat != "New Chat":
             st.session_state.chat_memory = json.load(f)
         st.session_state.current_file = selected_chat
 
-# Chat download
+# Download chat
 if st.session_state.get("chat_memory"):
     chat_json = json.dumps(st.session_state.chat_memory, indent=2)
     st.sidebar.download_button("💾 Download This Chat", chat_json, file_name="askmypdf_chat.json", mime="application/json")
 
-# Init vars (💡 include current_file)
+# Init vars
 st.session_state.setdefault("chat_memory", [])
 st.session_state.setdefault("vector_db", None)
 st.session_state.setdefault("rag_chain", None)
@@ -85,8 +138,8 @@ if not st.session_state.pdf_loaded:
 
             try:
                 pages = PyPDFLoader(temp_path).load()
-                if not pages:
-                    st.error("❌ PDF has no readable content.")
+                if not pages or all(len(p.page_content.strip()) < 10 for p in pages):
+                    st.error("❌ This PDF doesn't seem to contain extractable text. Try another file.")
                     st.stop()
 
                 chunks = RecursiveCharacterTextSplitter(chunk_size=1500, chunk_overlap=200).split_documents(pages)[:200]
@@ -110,12 +163,7 @@ if not st.session_state.pdf_loaded:
                 st.error(f"❌ Failed to load PDF: {str(e)}")
                 st.stop()
     else:
-        st.markdown("""
-        ## 👋 Welcome to AskMyPDF  
-        Upload a PDF above to start chatting  
-        - 🔐 100% Private  
-        - 🧠 Fully local & secure  
-        """)
+        st.info("📄 Please upload a valid PDF file to begin.")
         st.stop()
 
 # Show chat history
@@ -123,7 +171,7 @@ for entry in st.session_state.chat_memory:
     st.chat_message("🧑").write(entry["user"])
     st.chat_message("🤖").write(entry["bot"])
 
-# Chat
+# Chat input
 user_question = st.chat_input("Ask something about your PDF...")
 if user_question:
     if not st.session_state.rag_chain:
@@ -132,15 +180,23 @@ if user_question:
 
     with st.spinner("🤖 Thinking..."):
         try:
-            response = st.session_state.rag_chain.invoke({"question": user_question})
-            bot_answer = response["answer"] if isinstance(response, dict) else response
+            greetings = [
+                "hello", "hi", "hey", "good morning", "good evening",
+                "who are you", "what can you do", "help"
+            ]
+            q_lower = user_question.lower().strip()
+
+            if any(greet in q_lower for greet in greetings):
+                bot_answer = "👋 Hello! I’m AskMyPDF — your smart assistant for understanding PDFs. Just upload a PDF and ask me anything about it!"
+            else:
+                response = st.session_state.rag_chain.invoke({"question": user_question})
+                bot_answer = response["answer"] if isinstance(response, dict) else response
 
             st.chat_message("🧑").write(user_question)
             st.chat_message("🤖").write(bot_answer)
 
             st.session_state.chat_memory.append({"user": user_question, "bot": bot_answer})
 
-            # 💾 Save chat
             chat_file = st.session_state.current_file or f"chat_{uuid.uuid4().hex[:8]}.json"
             with open(os.path.join(user_folder, chat_file), "w") as f:
                 json.dump(st.session_state.chat_memory, f, indent=2)
@@ -148,3 +204,4 @@ if user_question:
 
         except Exception as e:
             st.error(f"⚠️ Failed to respond: {e}")
+
