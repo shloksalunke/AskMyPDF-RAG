@@ -180,13 +180,12 @@ if user_question:
 
     with st.spinner("🤖 Thinking..."):
         try:
-            greetings = [
-                "hello", "hi", "hey", "good morning", "good evening",
+            basic_inputs = {
+                "hello", "hi","hii", "hey", "good morning", "good evening",
                 "who are you", "what can you do", "help"
-            ]
-            q_lower = user_question.lower().strip()
+            }
 
-            if any(greet in q_lower for greet in greetings):
+            if user_question.lower().strip() in basic_inputs:
                 bot_answer = "👋 Hello! I’m AskMyPDF — your smart assistant for understanding PDFs. Just upload a PDF and ask me anything about it!"
             else:
                 response = st.session_state.rag_chain.invoke({"question": user_question})
@@ -204,4 +203,3 @@ if user_question:
 
         except Exception as e:
             st.error(f"⚠️ Failed to respond: {e}")
-
