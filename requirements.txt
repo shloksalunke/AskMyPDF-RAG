@@ -1,5 +1,5 @@
 # ============================================================
-# 📄 AskMyPDF v3 — Final Stable Build (Streamlit Cloud Ready)
+# 📄 AskMyPDF — FINAL STABLE BUILD (2025 verified)
 # Author: Shlok Salunke
 # ============================================================
 
@@ -7,24 +7,24 @@
 streamlit==1.51.0
 python-dotenv==1.2.1
 
-# 🔹 LangChain + Mistral (Old Stable Line for PaddleX)
-langchain==0.1.16
-langchain-community==0.0.35
-langchain-mistralai==0.0.9
-mistralai==0.4.2
-faiss-cpu==1.8.0
-pypdf==4.2.0
+# 🔹 LangChain Ecosystem (latest stable & compatible)
+langchain==1.0.3
+langchain-community==0.4.1
+langchain-mistralai==1.0.1
+mistralai==1.9.11
+faiss-cpu==1.12.0
+pypdf==6.1.3
 
 # 🔹 OCR + Paddle Stable Versions
-paddleocr==2.7.0.3
+paddleocr==3.3.1
 paddlepaddle==2.6.1
-paddlex==2.1.0           # ✅ compatible with langchain<0.2
+paddlex==3.3.8
 pdf2image==1.17.0
 Pillow==11.0.0
 opencv-python==4.10.0.84
 numpy==1.26.4
 
-# 🔹 Utilities
+# 🔹 Utility
 tqdm==4.66.5
 requests==2.32.5
 uuid==1.30
