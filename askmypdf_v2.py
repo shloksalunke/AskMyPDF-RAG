@@ -46,7 +46,8 @@ from langchain_community.vectorstores import FAISS
 from langchain_mistralai.chat_models import ChatMistralAI
 from langchain_mistralai import MistralAIEmbeddings
 from langchain_core.documents import Document
-from langchain.prompts import PromptTemplate
+from langchain_core.prompts import PromptTemplate
+
 
 # ✅ ConversationalRetrievalChain import fix (LangChain v1.x compatible)
 try:
