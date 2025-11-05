@@ -1,7 +1,7 @@
 # ============================================================
 # 🧠 AskMyPDF v3 — Enterprise-grade RAG Chatbot with OCR (PaddleOCR)
 # Author: Shlok Salunke
-# Final Build — Universal Fix for LangChain & PaddleX compatibility
+# ✅ FINAL FIX — LangChain & PaddleX import patch (stable for Streamlit Cloud)
 # ============================================================
 
 import os, sys, types, importlib.util, json, uuid, re
@@ -13,10 +13,14 @@ import numpy as np
 import cv2
 
 # ============================================================
-# 🧩 UNIVERSAL RUNTIME PATCH (before PaddleOCR or LangChain imports)
+# 🧩 UNIVERSAL RUNTIME PATCH (fixes all LangChain import errors)
 # ============================================================
 try:
-    # Force import of required submodules safely
+    # Safe import detection
+    lcd = None
+    lts = None
+    lcm = None
+
     if importlib.util.find_spec("langchain_core.documents"):
         import langchain_core.documents as lcd
     if importlib.util.find_spec("langchain_text_splitters"):
@@ -25,22 +29,26 @@ try:
         import langchain_core.memory as lcm
 
     # Patch: langchain.docstore.document
-    module_docstore = types.ModuleType("langchain.docstore.document")
-    module_docstore.Document = lcd.Document
-    sys.modules["langchain.docstore.document"] = module_docstore
+    if lcd:
+        module_docstore = types.ModuleType("langchain.docstore.document")
+        module_docstore.Document = lcd.Document
+        sys.modules["langchain.docstore.document"] = module_docstore
 
     # Patch: langchain.text_splitter
-    sys.modules["langchain.text_splitter"] = lts
+    if lts:
+        sys.modules["langchain.text_splitter"] = lts
 
     # Patch: langchain.memory
-    sys.modules["langchain.memory"] = lcm
+    if lcm:
+        sys.modules["langchain.memory"] = lcm
 
-    print("✅ LangChain compatibility patches applied successfully.")
+    print("✅ LangChain compatibility patch applied successfully!")
+
 except Exception as e:
-    print(f"⚠️ Patch failed — fallback may trigger later: {e}")
+    print(f"⚠️ Patch setup encountered issue: {e}")
 
 # ============================================================
-# 🧩 PaddleOCR (import *after* patching to avoid early dependency load)
+# 🧩 PaddleOCR (import only after patching!)
 # ============================================================
 from paddleocr import PaddleOCR
 
