@@ -1,8 +1,32 @@
-streamlit
-python-dotenv
-langchain
-langchain-community
-langchain-mistralai
-mistralai
-pypdf
-faiss-cpu
+# ============================================================
+# 📄 AskMyPDF v3 — Enterprise-grade RAG Chatbot with OCR (Shlok)
+# ============================================================
+
+# 🔹 Core Dependencies
+streamlit>=1.35.0
+python-dotenv>=1.0.1
+langchain>=0.2.10
+langchain-community>=0.2.10
+langchain-mistralai>=0.1.7
+mistralai>=0.4.2
+faiss-cpu>=1.8.0
+pypdf>=4.2.0
+
+# 🔹 OCR & Image Processing (PaddleOCR instead of pytesseract for full compatibility)
+paddleocr>=2.9.1
+paddlepaddle==2.6.1        # CPU build; for GPU use paddlepaddle-gpu==2.6.1.post120
+pdf2image>=1.17.0
+Pillow>=11.0.0
+opencv-python>=4.10.0.84
+numpy>=1.26.4
+
+# 🔹 Optional Enhancements / Utilities
+tqdm>=4.66.5
+requests>=2.32.3
+uuid>=1.30
+
+# 🔹 Compatibility & Stability
+jinja2>=3.1.6
+sympy>=1.12
+networkx>=3.2
+setuptools>=75.0.0
