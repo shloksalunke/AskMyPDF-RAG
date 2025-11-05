@@ -14,7 +14,8 @@ pypdf>=4.2.0
 
 # 🔹 OCR & Image Processing (PaddleOCR instead of pytesseract for full compatibility)
 paddleocr>=2.9.1
-paddlepaddle==2.6.1        # CPU build; for GPU use paddlepaddle-gpu==2.6.1.post120
+paddlex==3.3.8
+paddlepaddle==2.6.1     # CPU build; for GPU use paddlepaddle-gpu==2.6.1.post120
 pdf2image>=1.17.0
 Pillow>=11.0.0
 opencv-python>=4.10.0.84
