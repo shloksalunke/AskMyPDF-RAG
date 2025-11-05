@@ -15,16 +15,26 @@ import numpy as np
 import cv2
 
 # ============================================================
-# 🧩 Patch for PaddleX compatibility (fixes langchain.docstore import error)
+# 🧩 UNIVERSAL PATCH — Fixes all LangChain import mismatches (v1.x+)
 # ============================================================
-import langchain_core.documents as lcd
-module = types.ModuleType("langchain.docstore.document")
-module.Document = lcd.Document
-sys.modules["langchain.docstore.document"] = module
+try:
+    import langchain_core.documents as lcd
+    import langchain_text_splitters as lts
+    import langchain_core.memory as lcm
 
-# 🧩 Patch for missing text_splitter import in PaddleX
-import langchain_text_splitters as lts
-sys.modules["langchain.text_splitter"] = lts
+    # Patch 1: docstore.document
+    module_docstore = types.ModuleType("langchain.docstore.document")
+    module_docstore.Document = lcd.Document
+    sys.modules["langchain.docstore.document"] = module_docstore
+
+    # Patch 2: text_splitter
+    sys.modules["langchain.text_splitter"] = lts
+
+    # Patch 3: memory
+    sys.modules["langchain.memory"] = lcm
+
+except Exception as patch_error:
+    print(f"[Patch Warning] LangChain compatibility patch failed: {patch_error}")
 
 # ============================================================
 # 🧩 PaddleOCR for OCR (no Tesseract dependency)
