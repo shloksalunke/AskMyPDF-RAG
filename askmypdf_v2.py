@@ -22,6 +22,10 @@ module = types.ModuleType("langchain.docstore.document")
 module.Document = lcd.Document
 sys.modules["langchain.docstore.document"] = module
 
+# 🧩 Patch for missing text_splitter import in PaddleX
+import langchain_text_splitters as lts
+sys.modules["langchain.text_splitter"] = lts
+
 # ============================================================
 # 🧩 PaddleOCR for OCR (no Tesseract dependency)
 # ============================================================
