@@ -38,18 +38,49 @@ except Exception as e:
 from paddleocr import PaddleOCR
 
 # ============================================================
-# 🧠 LangChain + Mistral imports (modular & stable)
+# 🧠 LangChain & Mistral Components (Final Compatible Imports)
 # ============================================================
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
-from langchain_community.chains import ConversationalRetrievalChain
 from langchain_mistralai.chat_models import ChatMistralAI
 from langchain_mistralai import MistralAIEmbeddings
 from langchain_core.documents import Document
 from langchain.prompts import PromptTemplate
+
+# ✅ ConversationalRetrievalChain import fix (LangChain v1.x compatible)
+try:
+    from langchain.chains.retrieval import ConversationalRetrievalChain
+except ImportError:
+    from langchain.chains import ConversationalRetrievalChain
+
+# ✅ Memory replacement (LangChain ≥1.0)
 from langchain_core.messages import HumanMessage, AIMessage
 from langchain_community.chat_message_histories.in_memory import ChatMessageHistory
+
+class ConversationBufferMemory:
+    def __init__(self, memory_key="chat_history", return_messages=True):
+        self.memory_key = memory_key
+        self.return_messages = return_messages
+        self.history = ChatMessageHistory()
+
+    def load_memory_variables(self, inputs):
+        if self.return_messages:
+            return {self.memory_key: self.history.messages}
+        return {self.memory_key: "\n".join([m.content for m in self.history.messages])}
+
+    def save_context(self, inputs, outputs):
+        q = inputs.get("question") or inputs.get("input") or ""
+        a = outputs.get("answer") or outputs.get("output") or ""
+        if q:
+            self.history.add_message(HumanMessage(content=q))
+        if a:
+            self.history.add_message(AIMessage(content=a))
+
+    def clear(self):
+        self.history.clear()
+
+
 
 # ============================================================
 # ✅ Custom Memory (replaces removed langchain.memory)
