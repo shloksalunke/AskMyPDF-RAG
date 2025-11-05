@@ -5,20 +5,31 @@
 # ============================================================
 
 import os
-os.environ["PATH"] += os.pathsep + r"C:\Users\shlok\poppler-24.08.0\Library\bin"
-
-import streamlit as st
+import sys, types
 import json, uuid, re
+import streamlit as st
 from dotenv import load_dotenv
 from PIL import Image
 from pdf2image import convert_from_path
 import numpy as np
 import cv2
 
-# PaddleOCR for OCR (no Tesseract dependency)
+# ============================================================
+# 🧩 Patch for PaddleX compatibility (fixes langchain.docstore import error)
+# ============================================================
+import langchain_core.documents as lcd
+module = types.ModuleType("langchain.docstore.document")
+module.Document = lcd.Document
+sys.modules["langchain.docstore.document"] = module
+
+# ============================================================
+# 🧩 PaddleOCR for OCR (no Tesseract dependency)
+# ============================================================
 from paddleocr import PaddleOCR
 
-# LangChain & Mistral components
+# ============================================================
+# 🧠 LangChain & Mistral components
+# ============================================================
 from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_mistralai.chat_models import ChatMistralAI
