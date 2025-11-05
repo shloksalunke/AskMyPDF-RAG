@@ -53,23 +53,53 @@ except Exception as e:
 from paddleocr import PaddleOCR
 
 # ============================================================
-# 🧠 LangChain & Mistral components
+# 🧠 LangChain & Mistral components — FINAL FIX (Python 3.11 Compatible)
 # ============================================================
 from langchain_community.document_loaders import PyPDFLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_mistralai.chat_models import ChatMistralAI
 from langchain_mistralai import MistralAIEmbeddings
 from langchain_community.vectorstores import FAISS
 
-# ✅ Memory module (compatible with both old & new LangChain)
+# ✅ Universal Memory Handler (Fixes ModuleNotFoundError)
 try:
-    from langchain_community.memory import ConversationBufferMemory
-except ImportError:
+    # 🔹 New LangChain >= 1.0 — memory module no longer exists
+    from langchain_core.chat_history import BaseChatMessageHistory
+    from langchain_core.messages import HumanMessage, AIMessage
+    from langchain_community.chat_message_histories import InMemoryChatMessageHistory
+
+    class ConversationBufferMemory:
+        """Custom memory class compatible with LangChain >=1.0"""
+        def __init__(self, memory_key="chat_history", return_messages=True):
+            self.memory_key = memory_key
+            self.return_messages = return_messages
+            self.history = InMemoryChatMessageHistory()
+
+        def load_memory_variables(self, inputs):
+            if self.return_messages:
+                return {self.memory_key: self.history.messages}
+            return {self.memory_key: "\n".join([m.content for m in self.history.messages])}
+
+        def save_context(self, inputs, outputs):
+            if "question" in inputs:
+                self.history.add_message(HumanMessage(content=inputs["question"]))
+            if "answer" in outputs:
+                self.history.add_message(AIMessage(content=outputs["answer"]))
+
+        def clear(self):
+            self.history.clear()
+
+except Exception:
+    # 🔹 Fallback for older LangChain versions (< 1.0)
     from langchain.memory import ConversationBufferMemory
 
+# ============================================================
+# 🔗 Chain, Document, and PromptTemplate imports
+# ============================================================
 from langchain.chains import ConversationalRetrievalChain
 from langchain_core.documents import Document
 from langchain.prompts import PromptTemplate
+
 
 # ============================================================
 # 🔑 Load Environment Variables
