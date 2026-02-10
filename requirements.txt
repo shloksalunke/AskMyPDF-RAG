@@ -1,40 +1,10 @@
-# ============================================================
-# 📄 AskMyPDF — FINAL STABLE BUILD (2025 Verified)
-# Author: Shlok Salunke
-# ✅ Works perfectly on Streamlit Cloud (Python 3.11+)
-# ============================================================
-
-# 🔹 Core Framework
 streamlit==1.51.0
 python-dotenv==1.2.1
-
-# 🔹 LangChain Ecosystem (modular compatible with v1.x)
-langchain==1.0.3
-langchain-core==1.0.3
-langchain-community==0.4.1
-langchain-mistralai==1.0.1
-langchain-text-splitters==1.0.0
+langchain==0.3.27
+langchain-core==0.3.74
+langchain-community==0.3.29
+langchain-text-splitters==0.3.11
+langchain-mistralai==0.2.11
 mistralai==1.9.11
 faiss-cpu==1.12.0
 pypdf==6.1.3
-
-# 🔹 OCR + Image Handling (PaddleOCR + OpenCV + PDF2Image)
-paddleocr==3.3.1
-paddlepaddle==2.6.1
-paddlex==3.3.8
-pdf2image==1.17.0
-opencv-python==4.10.0.84
-Pillow==11.0.0
-numpy==1.26.4
-
-# 🔹 Data & Utilities
-pandas==2.3.3
-tqdm==4.66.5
-requests==2.32.5
-uuid==1.30
-
-# 🔹 Compatibility Fixes
-jinja2==3.1.6
-sympy==1.12
-networkx==3.2
-setuptools==75.0.0
