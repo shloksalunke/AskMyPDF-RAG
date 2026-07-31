@@ -1,0 +1,34 @@
+{
+  "user_id": "b803aa6d-69f4-4484-a7a3-f34bbad9a422",
+  "created_at": "2026-07-31T09:48:20.976367",
+  "messages": [
+    {
+      "user": "hii",
+      "bot": "Hello! How can I assist you today? 😊",
+      "tone": "Friendly",
+      "style": "Concise",
+      "timestamp": "2026-07-31T09:46:50.338670"
+    },
+    {
+      "user": "what is your name",
+      "bot": "I'm **AskMyPDF**, your friendly document assistant! 😊",
+      "tone": "Friendly",
+      "style": "Concise",
+      "timestamp": "2026-07-31T09:47:01.454745"
+    },
+    {
+      "user": "what is this document is about?",
+      "bot": "This document is a **resume/profile summary** of **Shlok Salunke**, an **AI & Machine Learning student** (BTech 2027 Batch) with hands-on experience in:\n\n- **Generative AI & LLMs** (Mistral 7B, LangChain, RAG, FAISS)\n- **Machine Learning & Deep Learning** (Scikit-learn, PyTorch, CNNs, GANs)\n- **Full-Stack Development** (FastAPI, React, TypeScript, PostgreSQL)\n- **Data Science & Analytics** (Pandas, NumPy, Power BI)\n- **DevOps & Tools** (Docker, Git, Jenkins)\n\nIt also highlights his **projects, certifications, achievements**, and **work experience** (e.g., Falkome AI, AICTE & Shell India internship).",
+      "tone": "Friendly",
+      "style": "Concise",
+      "timestamp": "2026-07-31T09:47:56.552553"
+    },
+    {
+      "user": "give brief summary of the owner",
+      "bot": "Shlok Salunke is an **AI & Machine Learning enthusiast** (BTech 2027 Batch) with hands-on experience in **Generative AI, LLMs, Deep Learning, and Full-Stack Development**. He has interned at **Falkome AI** (LLM optimization) and **AICTE & Shell India** (wind power forecasting). His projects include **AI PDF chatbots, crypto trading systems, and campus ride-sharing platforms**. He holds certifications in **ML & Deep Learning** and has ranked in **TCS CodeVita**.",
+      "tone": "Friendly",
+      "style": "Concise",
+      "timestamp": "2026-07-31T09:48:20.976367"
+    }
+  ]
+}

@@ -1,0 +1,153 @@
+2026-07-31 15:14:21,962  INFO      __main__ — New session: b803aa6d-69f4-4484-a7a3-f34bbad9a422
+2026-07-31 15:16:36,171  ERROR     app.core.ocr_processor — ❌ PaddleOCR init failed: Unknown argument: show_log
+2026-07-31 15:16:38,342  INFO      app.core.ocr_processor — 📖 Text-based PDF detected — using PyPDF
+2026-07-31 15:16:38,342  INFO      app.core.ocr_processor — 📖 Loading PDF with PyPDF: D:\AskMyPDF-RAG\data\tmp\upload_b803aa6d-69f4-4484-a7a3-f34bbad9a422.pdf
+2026-07-31 15:16:38,674  INFO      app.core.ocr_processor — ✅ PyPDF extracted 2 page(s)
+2026-07-31 15:16:38,674  INFO      app.core.rag_pipeline — Setting up RAG pipeline...
+2026-07-31 15:16:38,675  INFO      app.core.rag_pipeline — Chunking 2 doc(s) — size=1500, overlap=200
+2026-07-31 15:16:38,677  INFO      app.core.rag_pipeline — Created 6 chunk(s)
+2026-07-31 15:16:38,677  INFO      app.core.rag_pipeline — Building vector store for 6 chunk(s)...
+2026-07-31 15:16:41,243  INFO      httpx — HTTP Request: GET https://huggingface.co/api/agent-harnesses "HTTP/1.1 200 OK"
+2026-07-31 15:16:41,527  INFO      httpx — HTTP Request: HEAD https://huggingface.co/mistralai/Mixtral-8x7B-v0.1/resolve/main/tokenizer.json "HTTP/1.1 307 Temporary Redirect"
+2026-07-31 15:16:41,895  INFO      httpx — HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/mistralai/Mixtral-8x7B-v0.1/fc7ac94680e38d7348cfa806e51218e6273104b0/tokenizer.json "HTTP/1.1 200 OK"
+2026-07-31 15:16:42,825  INFO      httpx — HTTP Request: POST https://api.mistral.ai/v1/embeddings "HTTP/1.1 200 OK"
+2026-07-31 15:16:43,157  INFO      app.core.rag_pipeline — Vector store ready
+2026-07-31 15:16:43,161  INFO      app.core.rag_pipeline — RAG chain ready (model=mistral-small-latest)
+2026-07-31 15:16:43,161  INFO      app.core.rag_pipeline — RAG pipeline ready (6 chunks)
+2026-07-31 15:16:43,163  INFO      __main__ — PDF loaded: Shlok_linupx_resume(saint gobain).pdf
+2026-07-31 15:16:49,613  INFO      httpx — HTTP Request: POST https://api.mistral.ai/v1/embeddings "HTTP/1.1 200 OK"
+2026-07-31 15:16:50,333  INFO      httpx — HTTP Request: POST https://api.mistral.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-31 15:16:59,948  INFO      httpx — HTTP Request: POST https://api.mistral.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-31 15:17:00,596  INFO      httpx — HTTP Request: POST https://api.mistral.ai/v1/embeddings "HTTP/1.1 200 OK"
+2026-07-31 15:17:01,452  INFO      httpx — HTTP Request: POST https://api.mistral.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-31 15:17:54,384  INFO      httpx — HTTP Request: POST https://api.mistral.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-31 15:17:54,895  INFO      httpx — HTTP Request: POST https://api.mistral.ai/v1/embeddings "HTTP/1.1 200 OK"
+2026-07-31 15:17:56,549  INFO      httpx — HTTP Request: POST https://api.mistral.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-31 15:18:17,014  INFO      httpx — HTTP Request: POST https://api.mistral.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-31 15:18:17,780  INFO      httpx — HTTP Request: POST https://api.mistral.ai/v1/embeddings "HTTP/1.1 200 OK"
+2026-07-31 15:18:20,973  INFO      httpx — HTTP Request: POST https://api.mistral.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-31 15:22:09,165  INFO      __main__ — New session: a235650a-dee3-4012-a2df-799f3e01c6f3
+2026-07-31 15:39:31,602  INFO      __main__ — New session: 7e181dd1-6b1a-4db0-92e5-4bcc4a5b3987
+2026-07-31 15:39:40,824  INFO      app.core.ocr_processor — Tesseract OCR engine ready: v5.5.3.20260724
+2026-07-31 15:39:42,351  INFO      app.core.ocr_processor — Scanned PDF detected — applying Tesseract OCR
+2026-07-31 15:39:42,351  INFO      app.core.ocr_processor — Tesseract OCR processing D:\AskMyPDF-RAG\data\tmp\upload_7e181dd1-6b1a-4db0-92e5-4bcc4a5b3987.pdf at 300 DPI...
+2026-07-31 15:39:42,366  ERROR     app.core.ocr_processor — OCR processing failed: Unable to get page count. Is poppler installed and in PATH?
+2026-07-31 15:39:42,368  ERROR     __main__ — PDF processing error
+Traceback (most recent call last):
+  File "D:\AskMyPDF-RAG\.venv\Lib\site-packages\pdf2image\pdf2image.py", line 581, in pdfinfo_from_path
+    proc = Popen(command, env=env, stdout=PIPE, stderr=PIPE)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\subprocess.py", line 1026, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\subprocess.py", line 1538, in _execute_child
+    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [WinError 2] The system cannot find the file specified
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\AskMyPDF-RAG\app\core\ocr_processor.py", line 184, in _extract_with_ocr
+    pages = convert_from_path(pdf_path, dpi=OCR_DPI)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\AskMyPDF-RAG\.venv\Lib\site-packages\pdf2image\pdf2image.py", line 127, in convert_from_path
+    page_count = pdfinfo_from_path(
+                 ^^^^^^^^^^^^^^^^^^
+  File "D:\AskMyPDF-RAG\.venv\Lib\site-packages\pdf2image\pdf2image.py", line 607, in pdfinfo_from_path
+    raise PDFInfoNotInstalledError(
+pdf2image.exceptions.PDFInfoNotInstalledError: Unable to get page count. Is poppler installed and in PATH?
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\AskMyPDF-RAG\app\main.py", line 263, in <module>
+    documents = ocr.extract_from_pdf(str(tmp_path))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\AskMyPDF-RAG\app\core\ocr_processor.py", line 107, in extract_from_pdf
+    return self._extract_with_ocr(pdf_path)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\AskMyPDF-RAG\app\core\ocr_processor.py", line 214, in _extract_with_ocr
+    raise RuntimeError(f"OCR processing failed: {exc}") from exc
+RuntimeError: OCR processing failed: Unable to get page count. Is poppler installed and in PATH?
+2026-07-31 15:43:10,758  INFO      __main__ — New session: 77c951de-63a2-42cf-8536-ae6a8cfe43be
+2026-07-31 15:43:16,097  INFO      app.core.ocr_processor — Tesseract OCR engine ready: v5.5.3.20260724
+2026-07-31 15:43:16,381  INFO      app.core.ocr_processor — Scanned PDF detected — applying Tesseract OCR
+2026-07-31 15:43:16,382  INFO      app.core.ocr_processor — Tesseract OCR processing D:\AskMyPDF-RAG\data\tmp\upload_77c951de-63a2-42cf-8536-ae6a8cfe43be.pdf at 300 DPI...
+2026-07-31 15:43:18,717  INFO      app.core.ocr_processor —   OCR page 1 / 2
+2026-07-31 15:43:22,858  INFO      app.core.ocr_processor —   OCR page 2 / 2
+2026-07-31 15:43:25,371  INFO      app.core.ocr_processor — Tesseract OCR complete — 2 page(s) extracted
+2026-07-31 15:43:25,379  INFO      app.core.rag_pipeline — Setting up RAG pipeline...
+2026-07-31 15:43:25,379  INFO      app.core.rag_pipeline — Chunking 2 doc(s) — size=1500, overlap=200
+2026-07-31 15:43:25,381  INFO      app.core.rag_pipeline — Created 5 chunk(s)
+2026-07-31 15:43:25,381  INFO      app.core.rag_pipeline — Building vector store for 5 chunk(s)...
+2026-07-31 15:43:29,064  INFO      httpx — HTTP Request: HEAD https://huggingface.co/mistralai/Mixtral-8x7B-v0.1/resolve/main/tokenizer.json "HTTP/1.1 307 Temporary Redirect"
+2026-07-31 15:43:29,065  WARNING   huggingface_hub.utils._http — Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-07-31 15:43:29,164  INFO      httpx — HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/mistralai/Mixtral-8x7B-v0.1/fc7ac94680e38d7348cfa806e51218e6273104b0/tokenizer.json "HTTP/1.1 200 OK"
+2026-07-31 15:43:29,976  INFO      httpx — HTTP Request: POST https://api.mistral.ai/v1/embeddings "HTTP/1.1 200 OK"
+2026-07-31 15:43:30,026  INFO      faiss.loader — Loading faiss with AVX2 support.
+2026-07-31 15:43:30,026  INFO      faiss.loader — Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-07-31 15:43:30,028  INFO      faiss.loader — Loading faiss.
+2026-07-31 15:43:30,558  INFO      faiss.loader — Successfully loaded faiss.
+2026-07-31 15:43:30,637  INFO      app.core.rag_pipeline — Vector store ready
+2026-07-31 15:43:30,639  INFO      app.core.rag_pipeline — RAG chain ready (model=mistral-small-latest)
+2026-07-31 15:43:30,639  INFO      app.core.rag_pipeline — RAG pipeline ready (5 chunks)
+2026-07-31 15:43:30,640  INFO      __main__ — PDF loaded: safepdfkit.pdf
+2026-07-31 15:44:03,426  INFO      httpx — HTTP Request: POST https://api.mistral.ai/v1/embeddings "HTTP/1.1 200 OK"
+2026-07-31 15:44:04,468  INFO      httpx — HTTP Request: POST https://api.mistral.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-31 15:45:30,929  INFO      httpx — HTTP Request: POST https://api.mistral.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-31 15:45:31,446  INFO      httpx — HTTP Request: POST https://api.mistral.ai/v1/embeddings "HTTP/1.1 200 OK"
+2026-07-31 15:45:33,497  INFO      httpx — HTTP Request: POST https://api.mistral.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-31 15:46:43,518  INFO      app.core.ocr_processor — Scanned PDF detected — applying Tesseract OCR
+2026-07-31 15:46:43,518  INFO      app.core.ocr_processor — Tesseract OCR processing D:\AskMyPDF-RAG\data\tmp\upload_77c951de-63a2-42cf-8536-ae6a8cfe43be.pdf at 300 DPI...
+2026-07-31 15:46:54,527  INFO      app.core.ocr_processor —   OCR page 1 / 8
+2026-07-31 15:46:57,996  INFO      app.core.ocr_processor —   OCR page 2 / 8
+2026-07-31 15:47:01,543  INFO      app.core.ocr_processor —   OCR page 3 / 8
+2026-07-31 15:47:03,055  INFO      app.core.ocr_processor —   OCR page 4 / 8
+2026-07-31 15:47:05,300  INFO      app.core.ocr_processor —   OCR page 5 / 8
+2026-07-31 15:47:08,449  INFO      app.core.ocr_processor —   OCR page 6 / 8
+2026-07-31 15:47:12,393  INFO      app.core.ocr_processor —   OCR page 7 / 8
+2026-07-31 15:47:17,360  INFO      app.core.ocr_processor —   OCR page 8 / 8
+2026-07-31 15:47:20,953  INFO      app.core.ocr_processor — Tesseract OCR complete — 8 page(s) extracted
+2026-07-31 15:47:20,975  INFO      app.core.rag_pipeline — Setting up RAG pipeline...
+2026-07-31 15:47:20,976  INFO      app.core.rag_pipeline — Chunking 8 doc(s) — size=1500, overlap=200
+2026-07-31 15:47:20,978  INFO      app.core.rag_pipeline — Created 23 chunk(s)
+2026-07-31 15:47:20,978  INFO      app.core.rag_pipeline — Building vector store for 23 chunk(s)...
+2026-07-31 15:47:22,031  INFO      httpx — HTTP Request: HEAD https://huggingface.co/mistralai/Mixtral-8x7B-v0.1/resolve/main/tokenizer.json "HTTP/1.1 307 Temporary Redirect"
+2026-07-31 15:47:22,100  INFO      httpx — HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/mistralai/Mixtral-8x7B-v0.1/fc7ac94680e38d7348cfa806e51218e6273104b0/tokenizer.json "HTTP/1.1 200 OK"
+2026-07-31 15:47:22,893  INFO      httpx — HTTP Request: POST https://api.mistral.ai/v1/embeddings "HTTP/1.1 200 OK"
+2026-07-31 15:47:22,999  INFO      app.core.rag_pipeline — Vector store ready
+2026-07-31 15:47:23,000  INFO      app.core.rag_pipeline — RAG chain ready (model=mistral-small-latest)
+2026-07-31 15:47:23,001  INFO      app.core.rag_pipeline — RAG pipeline ready (23 chunks)
+2026-07-31 15:47:23,002  INFO      __main__ — PDF loaded: PublicWaterMassMailing.pdf
+2026-07-31 15:47:45,270  INFO      app.utils.chat_manager — Chat deleted: D:\AskMyPDF-RAG\data\chats\77c951de-63a2-42cf-8536-ae6a8cfe43be\chat_824548b0.json
+2026-07-31 15:47:54,292  INFO      app.core.ocr_processor — Scanned PDF detected — applying Tesseract OCR
+2026-07-31 15:47:54,293  INFO      app.core.ocr_processor — Tesseract OCR processing D:\AskMyPDF-RAG\data\tmp\upload_77c951de-63a2-42cf-8536-ae6a8cfe43be.pdf at 300 DPI...
+2026-07-31 15:48:04,781  INFO      app.core.ocr_processor —   OCR page 1 / 8
+2026-07-31 15:48:08,435  INFO      app.core.ocr_processor —   OCR page 2 / 8
+2026-07-31 15:48:12,152  INFO      app.core.ocr_processor —   OCR page 3 / 8
+2026-07-31 15:48:13,614  INFO      app.core.ocr_processor —   OCR page 4 / 8
+2026-07-31 15:48:15,876  INFO      app.core.ocr_processor —   OCR page 5 / 8
+2026-07-31 15:48:19,023  INFO      app.core.ocr_processor —   OCR page 6 / 8
+2026-07-31 15:48:22,983  INFO      app.core.ocr_processor —   OCR page 7 / 8
+2026-07-31 15:48:28,738  INFO      app.core.ocr_processor —   OCR page 8 / 8
+2026-07-31 15:48:32,653  INFO      app.core.ocr_processor — Tesseract OCR complete — 8 page(s) extracted
+2026-07-31 15:48:32,670  INFO      app.core.rag_pipeline — Setting up RAG pipeline...
+2026-07-31 15:48:32,672  INFO      app.core.rag_pipeline — Chunking 8 doc(s) — size=1500, overlap=200
+2026-07-31 15:48:32,673  INFO      app.core.rag_pipeline — Created 23 chunk(s)
+2026-07-31 15:48:32,673  INFO      app.core.rag_pipeline — Building vector store for 23 chunk(s)...
+2026-07-31 15:48:33,715  INFO      httpx — HTTP Request: HEAD https://huggingface.co/mistralai/Mixtral-8x7B-v0.1/resolve/main/tokenizer.json "HTTP/1.1 307 Temporary Redirect"
+2026-07-31 15:48:33,777  INFO      httpx — HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/mistralai/Mixtral-8x7B-v0.1/fc7ac94680e38d7348cfa806e51218e6273104b0/tokenizer.json "HTTP/1.1 200 OK"
+2026-07-31 15:48:34,641  INFO      httpx — HTTP Request: POST https://api.mistral.ai/v1/embeddings "HTTP/1.1 200 OK"
+2026-07-31 15:48:34,974  INFO      app.core.rag_pipeline — Vector store ready
+2026-07-31 15:48:34,975  INFO      app.core.rag_pipeline — RAG chain ready (model=mistral-small-latest)
+2026-07-31 15:48:34,975  INFO      app.core.rag_pipeline — RAG pipeline ready (23 chunks)
+2026-07-31 15:48:34,976  INFO      __main__ — PDF loaded: PublicWaterMassMailing.pdf
+2026-07-31 15:48:47,066  INFO      httpx — HTTP Request: POST https://api.mistral.ai/v1/embeddings "HTTP/1.1 200 OK"
+2026-07-31 15:48:48,211  INFO      httpx — HTTP Request: POST https://api.mistral.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-31 15:49:06,443  INFO      httpx — HTTP Request: POST https://api.mistral.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-31 15:49:06,911  INFO      httpx — HTTP Request: POST https://api.mistral.ai/v1/embeddings "HTTP/1.1 200 OK"
+2026-07-31 15:49:07,897  INFO      httpx — HTTP Request: POST https://api.mistral.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-31 15:49:29,650  INFO      httpx — HTTP Request: POST https://api.mistral.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-31 15:49:30,451  INFO      httpx — HTTP Request: POST https://api.mistral.ai/v1/embeddings "HTTP/1.1 200 OK"
+2026-07-31 15:49:39,551  INFO      httpx — HTTP Request: POST https://api.mistral.ai/v1/chat/completions "HTTP/1.1 200 OK"
